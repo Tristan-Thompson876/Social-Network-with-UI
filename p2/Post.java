@@ -3,14 +3,16 @@ package p2;
 import java.util.ArrayList;
 
 import p1.enums.PostAudience;
+import p1.enums.PostType;
 import p1.enums.ReactionType;
 
 public abstract class Post implements Comparable<Post> {
 
 	private static ArrayList<Integer> postIDs = new ArrayList<Integer>();
 
+	private static int postscount = 0;
 	// immutable instance data
-	private int postID;
+	private int postID = ++postscount;
 	private PostAudience sharedWith = PostAudience.Public;
 
 
@@ -20,6 +22,8 @@ public abstract class Post implements Comparable<Post> {
 	private Reaction downvote = new Reaction(ReactionType.Downvote);
 	private ArrayList<Content> contents = new ArrayList<Content>();
 	private ArrayList<String> reactedUsers = new ArrayList<>();
+	private Content content;
+	private User username;
 
 	public Post() {
 		assignPostID();
@@ -102,6 +106,36 @@ public abstract class Post implements Comparable<Post> {
 		// and return it.
 		return 0;
 	}
+	/**
+	 * Post Id setter
+	 */
+	public void setPostID(int pstID){
+		this.pstID = pstID;
+	}
+	/**
+	 * Sharedwith setter
+	 */
+	public void setSharedWith(PostAudience sharedWith){
+		this.sharedWith = sharedWith;
+	}
+	/**
+	 * Post Type setter
+	 */
+	public void setPostType(PostType postType){
+		this.postType = postType;
+	}
+	/**
+	 * Content setter
+	 */
+	public void setContent(Content content){
+		this.content = content;
+	}
+	/**
+	 * 
+	 * @param name
+	 */
+	public void setUname(User name){
+		this.username = name;
 
 	@Override
 	public String toString() {

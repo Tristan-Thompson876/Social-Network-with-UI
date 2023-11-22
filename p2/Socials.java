@@ -15,7 +15,8 @@ public class Socials {
 	/* is mutable instance data */
 	private User whoIsLoggedIn = null;
 	private FeedAlgorithm feedSort;
-	private ArrayList<Integer> posts = new ArrayList<Integer>();
+	private ArrayList<Post> posts = new ArrayList<Post>();
+	//private ArrayList<Integer> posts = new ArrayList<Integer>();
 	private ArrayList<User> users = new ArrayList<User>();
 
 	public Socials(String name) {
@@ -35,7 +36,7 @@ public class Socials {
 
 	public void removeSocialsPost(int pstID) {
 		for (Post post : posts) {
-			if (post.getPostId() == pstID) {
+		if (post.getID() == pstID) {
 				posts.remove(post);
 				System.out.println("Post with pstID " + pstID + "was removed successfully.");
 				//return; 
@@ -46,7 +47,7 @@ public class Socials {
 
 	public boolean searchForSocialsPost(int pstID) {
 		for (Post post : posts) {
-			if (post.getPostId() == pstID) {
+			if (post.getID() == pstID) {
 				return true;
 			}
 		}
@@ -55,7 +56,7 @@ public class Socials {
 
 	public String whoOwnsSocialsPost(int pstID) {
 		for (Post post : posts) {
-			if (post.getPostId() == pstID) {
+			if (post.getID() == pstID) {
 				return "Owner found";
 			}
 		}
