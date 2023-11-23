@@ -18,6 +18,7 @@ public class Socials {
 	private ArrayList<Post> posts = new ArrayList<Post>();
 	//private ArrayList<Integer> posts = new ArrayList<Integer>();
 	private ArrayList<User> users = new ArrayList<User>();
+	private ArrayList stringUser = new ArrayList<String>();
 
 	public Socials(String name) {
 		this.name = name;
@@ -97,12 +98,23 @@ public class Socials {
 		whoIsLoggedIn = null;
 	}
 
+	/////////////////////////////////////////////////////////
 	public boolean isSocialsUser(String name) {
+		for(User u : users){
+			if(u.getUname() == name){
+				return true;
+			}
+		}
 		return false;
 	}
 
 	public ArrayList<String> getAllSocialsUsers() {
-		return new ArrayList<String>();
+		for(User u : users){
+			String aname = u.getUname();
+			stringUser.add(aname);
+
+		}
+		return stringUser;
 	}
 
 	public ArrayList<Integer> getSocialsUserFeed(String name) {

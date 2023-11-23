@@ -1,6 +1,12 @@
 package p2.ui;
 import java.awt.*;
 import javax.swing.*;
+
+import p2.Post;
+import p2.Socials;
+import p2.User;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class loginScreen extends JFrame {
@@ -19,6 +25,8 @@ public class loginScreen extends JFrame {
     JTextField unameText = new JTextField(11);
     JTextField passwordText = new JTextField(11);
 
+    private ArrayList<User> user = new ArrayList<User>();
+
     public loginScreen(HashMap<String,String> LoginInfo){
         this.LoginInfo = LoginInfo;
 
@@ -31,6 +39,12 @@ public class loginScreen extends JFrame {
         loginPanel.add(loginButtoPanel);
         loginButtoPanel.add(logon);
 
+    }
+
+    public void validInfo(String name, String password){
+        if(Socials.isSocialsUser(name)){
+
+        }
     }
 
 

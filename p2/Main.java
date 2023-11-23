@@ -1,5 +1,7 @@
 package p2;
 
+import p2.ui.loginScreen;
+
 public class Main {
     /***
      * 
@@ -11,7 +13,7 @@ public class Main {
 
         //Login login = new Login();
 
-        //LoginScreen loginScreen = new LoginScreen(login.getLoginInfo());
+        loginScreen loginScreen = new loginScreen(login.getLoginInfo());
 
         
 
