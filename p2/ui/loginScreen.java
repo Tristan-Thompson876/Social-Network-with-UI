@@ -45,7 +45,7 @@ public class LoginScreen extends JFrame {
     public void logOnInfo(String name, String password){
         Socials social = new Socials(name);
        if(social.login(name, password) == true){
-        publicFeed feed = new publicFeed();
+        PublicFeed feed = new PublicFeed();
 
 
        }
