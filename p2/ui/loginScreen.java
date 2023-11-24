@@ -9,7 +9,7 @@ import p2.User;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class loginScreen extends JFrame {
+public class LoginScreen extends JFrame {
     protected HashMap<String, String> LoginInfo = new HashMap<String, String>();
 
     JPanel loginPanelInfo = new JPanel();
@@ -27,7 +27,7 @@ public class loginScreen extends JFrame {
 
     private ArrayList<User> user = new ArrayList<User>();
 
-    public loginScreen(HashMap<String,String> LoginInfo){
+    public LoginScreen(HashMap<String,String> LoginInfo){
         this.LoginInfo = LoginInfo;
 
         this.setSize(800, 800);
@@ -41,10 +41,13 @@ public class loginScreen extends JFrame {
 
     }
 
-    public void validInfo(String name, String password){
-        if(Socials.isSocialsUser(name)){
+    public void logOnInfo(String name, String password){
+        Socials social = new Socials(name);
+       if(social.login(name, password) == true){
+        publicFeed feed = new publicFeed();
 
-        }
+
+       }
     }
 
 

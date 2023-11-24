@@ -1,6 +1,9 @@
 package p2;
 
-import p2.ui.loginScreen;
+import p2.ui.LoginScreen;
+
+
+
 
 public class Main {
     /***
@@ -8,12 +11,13 @@ public class Main {
      * 
      * Work the code the the driver starting the project.
      */
+    private String password, username;
     public static void main(String[] args) {
 
 
         //Login login = new Login();
 
-        loginScreen loginScreen = new loginScreen(login.getLoginInfo());
+        LoginScreen loginScreen = new LoginScreen(password, username);
 
         
 
