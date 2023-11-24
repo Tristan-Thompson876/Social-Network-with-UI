@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LoginScreen extends JFrame {
-    protected HashMap<String, String> LoginInfo = new HashMap<String, String>();
+    //protected HashMap<String, String> LoginInfo = new HashMap<String, String>();
 
     JPanel loginPanelInfo = new JPanel();
     JPanel loginButtoPanel = new JPanel();
@@ -27,8 +27,9 @@ public class LoginScreen extends JFrame {
 
     private ArrayList<User> user = new ArrayList<User>();
 
-    public LoginScreen(HashMap<String,String> LoginInfo){
-        this.LoginInfo = LoginInfo;
+
+    public LoginScreen(){
+        /*this.LoginInfo = LoginInfo;*/
 
         this.setSize(800, 800);
         loginPanelInfo.setSize(700, 500);

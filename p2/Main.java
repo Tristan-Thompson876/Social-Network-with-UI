@@ -17,7 +17,7 @@ public class Main {
 
         //Login login = new Login();
 
-        LoginScreen loginScreen = new LoginScreen(password, username);
+        LoginScreen loginScreen = new LoginScreen(null);
 
         
 
