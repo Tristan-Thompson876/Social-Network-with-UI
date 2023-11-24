@@ -79,19 +79,25 @@ public class Socials {
 		}
 	}
 
+	/**
+	 * whoIsLoggedIn should be null before a new user tries to login
+	 * 
+	 * if login successful update whoIsLoggedIn with user and return true else
+	 * return false
+	 * 
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	public boolean login(String username, String password) {
-
-		/*
-		 * whoIsLoggedIn should be null before a new user tries to login
-		 * 
-		 * if login successful update whoIsLoggedIn with user and return true else
-		 * return false
-		 * 
-		 * 
-		 */
-
+		for(User u : users){
+			if(u.getUname() == username && u.getPassword() == password ){
+				whoIsLoggedIn = u;
+				return true;
+			}
+		}
 		return false;
-
 	}
 
 	public void logout() {
