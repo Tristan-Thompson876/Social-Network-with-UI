@@ -16,18 +16,18 @@ public class User {
 	// mutable instance data
 	// there should be no overlap between subscribers and restricted
 	// however, an overlap between subscribed and restricted is OK
-	private ArrayList<String> subscribers = new ArrayList<String>(), subscribed = new ArrayList<String>(),
-			restricted = new ArrayList<String>();
+	private ArrayList<String> subscribers = new ArrayList<String>(), subscribed = new ArrayList<String>(), restricted = new ArrayList<String>();
 	private ArrayList<Post> posts = new ArrayList<Post>();
 	private PostAudience sharedWith;
-	private Post post;
-    private Content content;
+	//private Post post;
+    //private Content content;
 
 
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
+
 	//////////////////////////////Getters
     public String getUname(){
         return username;
@@ -51,12 +51,60 @@ public class User {
     }
 
 	public boolean login(String uname, String pword) {
-		return false;
+        return username.equals(uname) && password.equals(pword);
 	}
+    private static int postCounter = 0;
 
-	public int addNewPost(PostType type, PostAudience sharedWith, String... contents) {
-		return 0;
+    private int generatePostId() {
+        return ++postCounter;
+    }
+
+    public Post addNewPostu(PostType type, PostAudience sharedWith, String... contents) {
+        if (!isLoggedIn()) {
+            System.out.println("User is not logged in. Cannot add a new post.");
+            return null;
+        }
+    
+        Post newPost = null;
+    
+        int postId = generatePostId();
+    
+        if (type == PostType.Text) {
+            newPost = new TextPost(sharedWith, contents);
+        } else if (type == PostType.ExtrenalLink) {
+            newPost = new ExternalLinkPost(sharedWith, contents[0]);
+        }
+    
+        if (newPost != null) {
+            newPost.setPostID(postId);
+            // updatePostAccess(newPost);
+            posts.add(newPost);
+    
+            return newPost;
+        }
+    
+        return null;
+        
+    }
+
+	/*public int addNewPost(PostType type, PostAudience sharedWith, String... contents) {
+        
+        
+        if (type == PostType.Text) {
+            newPost = new TextPost(sharedWith, contents);
+        }else if (type == PostType.ExtrenalLink) {
+            newPost = new ExternalLinkPost(sharedWith, contents[0]);
+            
+        posts.add(newPost);
+   
+        } else {
+            System.out.println("invalid post");
+        }
+        
+    
+        return newPost.getID();
 	}
+    */
 
 	public boolean deletePost(int pstID) {
 		return false;
@@ -67,13 +115,15 @@ public class User {
      * @param pstID
      * @param vote
      */
-	public void reactToPost(String pstID, ReactionType vote) {
+	public boolean reactToPost(String pstID, ReactionType vote) {
         for(Post p : posts){
             if(p.getID() == Integer.parseInt(pstID)){
                 String username = p.getUsername().getUname();  
                 p.addReaction(username, vote);
+                return true;
             }
         }
+        return false;
 	}
 
 	public boolean unreactToPost(String pstID) {
@@ -137,6 +187,10 @@ public class User {
         }
 		return false;
 	}
+
+    private boolean isLoggedIn() {
+        return password != null && !password.isEmpty();
+    }
 
 	/**
      * 

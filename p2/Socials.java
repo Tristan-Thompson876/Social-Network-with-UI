@@ -18,7 +18,7 @@ public class Socials {
 	private ArrayList<Post> posts = new ArrayList<Post>();
 	//private ArrayList<Integer> posts = new ArrayList<Integer>();
 	private ArrayList<User> users = new ArrayList<User>();
-	private ArrayList stringUser = new ArrayList<String>();
+	private ArrayList dnames = new ArrayList<String>();
 
 	public Socials(String name) {
 		this.name = name;
@@ -65,15 +65,19 @@ public class Socials {
 	}
 
 	public ArrayList<Integer> getAllSocialsPosts() {
-		return new ArrayList<Integer>();
+		ArrayList<Integer> postIDs = new ArrayList<Integer>();
+		for (Post post : posts) {
+            postIDs.add(post.getID());
+        }
+        return postIDs;
 	}
 
-	public void addNewUser(String name, String password) {
-		User u = new User(name, password, null);
+	public void addNewSocialsUser(String name, String password) {
+		User u = new User(name, password);
 		users.add(u);
 	}
 
-	public void removeUser(String name) {
+	public void removeSocialsUser(String name) {
 		if(isSocialsUser(name)){
 			users.remove(name);
 		}
@@ -107,7 +111,7 @@ public class Socials {
 	/////////////////////////////////////////////////////////
 	public boolean isSocialsUser(String name) {
 		for(User u : users){
-			if(u.getUname() == name){
+			if(u.getUname().equals(name)){
 				return true;
 			}
 		}
@@ -115,12 +119,13 @@ public class Socials {
 	}
 
 	public ArrayList<String> getAllSocialsUsers() {
+		//ArrayList<String> dnames = new ArrayList<String>();
 		for(User u : users){
 			String aname = u.getUname();
-			stringUser.add(aname);
+			dnames.add(aname);
 
 		}
-		return stringUser;
+		return dnames;
 	}
 
 	public ArrayList<Integer> getSocialsUserFeed(String name) {
@@ -141,8 +146,11 @@ public class Socials {
 
 	/* whoIsLoggedIn adds a new post */
 	public void addNewPost(PostType type, PostAudience sharedWith, String... contents) {
-		posts.add(whoIsLoggedIn.addNewPost(type, sharedWith, contents));
+		if (whoIsLoggedIn != null) {
+			posts.add(whoIsLoggedIn.addNewPostu(type, sharedWith, contents));
+		}		
 	}
+	//
 
 	/* whoIsLoggedIn deletes a post they own */
 	public boolean deletePost(int pstID) {

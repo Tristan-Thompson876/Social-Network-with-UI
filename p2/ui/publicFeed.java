@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class PublicFeed {
+public class PublicFeed extends JFrame{
     JPanel postPanel = new JPanel();
     JPanel navPanel = new JPanel();
     JPanel feedPanel = new JPanel();

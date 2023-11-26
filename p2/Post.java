@@ -13,6 +13,7 @@ public abstract class Post implements Comparable<Post> {
 	private static int postscount = 0;
 	// immutable instance data
 	private int postID = ++postscount;
+	private PostType postType = PostType.Text;
 	private PostAudience sharedWith = PostAudience.Public;
 
 
@@ -89,6 +90,14 @@ public abstract class Post implements Comparable<Post> {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	*/
+	public User getUsername(){
+		return username;
+	}
+
 	public PostAudience getSharedWith() {
 		return sharedWith;
 	}
@@ -110,7 +119,7 @@ public abstract class Post implements Comparable<Post> {
 	 * Post Id setter
 	 */
 	public void setPostID(int pstID){
-		this.pstID = pstID;
+		this.postID = pstID;
 	}
 	/**
 	 * Sharedwith setter
@@ -136,6 +145,7 @@ public abstract class Post implements Comparable<Post> {
 	 */
 	public void setUname(User name){
 		this.username = name;
+	}
 
 	@Override
 	public String toString() {
