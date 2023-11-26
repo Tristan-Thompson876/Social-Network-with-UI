@@ -5,6 +5,7 @@ import javax.swing.*;
 
 public class PublicFeed extends JFrame{
     String nme;
+    String id;
     JPanel postPanel = new JPanel();
     JPanel navPanel = new JPanel();
     JPanel feedPanel = new JPanel();
@@ -33,6 +34,8 @@ public class PublicFeed extends JFrame{
 
 
         setTitle("Sweet mail");
+
+        display posts;
 
 
         this.add(feedPanel);
