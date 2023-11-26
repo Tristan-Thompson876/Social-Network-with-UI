@@ -87,6 +87,7 @@ public class LoginScreen extends JFrame {
 
                 // Perform signup logic here
                 social.addNewSocialsUser(uname, mpassword);
+                System.out.println("names:" + social.getAllSocialsUsers());
                 //switchToLogin();
                 System.out.println("Signed up");
                 }
@@ -95,11 +96,12 @@ public class LoginScreen extends JFrame {
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(isSignUp = false){
+                if(isSignUp == false){
                     String uname = unameText.getText();
                     String mpassword = passwordText.getText();
                     social.login(uname, mpassword);
                     System.out.println("logged in");
+                    new PublicFeed(uname);
                 }
                 else{
 
@@ -110,9 +112,6 @@ public class LoginScreen extends JFrame {
         this.add(loginPanel);
         this.setVisible(true);
 
-
-        
-
     }
 
     private void switchToSignUp() {
@@ -122,8 +121,8 @@ public class LoginScreen extends JFrame {
         loginPanel.remove(unameText);
         loginPanel.remove(password);
         loginPanel.remove(passwordText);
-        loginPanel.remove(logon);
-        loginPanel.remove(Signup);
+        loginButtoPanel.remove(logon);
+        //loginButtoPanel.remove(Signup);
 
         loginPanel.add(Su_Panel);
         Su_Panel.add(username);
@@ -152,6 +151,8 @@ public class LoginScreen extends JFrame {
         loginPanel.add(password);
         loginPanel.add(passwordText);
         loginPanel.add(submit);
+        loginButtoPanel.add(logon);
+        loginButtoPanel.add(Signup);
         
         
     
@@ -162,13 +163,14 @@ public class LoginScreen extends JFrame {
     public void logOnInfo(){
         String uname = unameText.getText();
         String mpassword = passwordText.getText();
-
+        System.out.println("in login");
         if(social.isRestricted(uname)){
+            System.out.println("okay");
             if (social.login(uname, mpassword)) {
                 System.out.println("Login successful!");
             } else {
                 System.out.println("Login failed. Please check your credentials.");
-                
+                System.out.println("names:" + social.getAllSocialsUsers());
             }
         }
     }

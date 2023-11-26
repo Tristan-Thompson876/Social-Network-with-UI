@@ -2,29 +2,40 @@ package p2.ui;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class PublicFeed extends JFrame{
+    String nme;
     JPanel postPanel = new JPanel();
     JPanel navPanel = new JPanel();
     JPanel feedPanel = new JPanel();
-    JButton profile = new JButton();
+    JButton profile = new JButton("profile");
+    JButton refresh = new JButton("refresh");
 
     //labels
     JLabel username = new JLabel("User:");
     JLabel post = new JLabel("Post");
 
-    public PublicFeed(){
+    public PublicFeed(String name){
         //this.setSize(800, 800);
+        this.nme = name;
         feedPanel.setSize(700, 500);
         this.setSize(800, 800);
         feedPanel.setBackground(Color.decode("#00001a")); 
 
+        username.setText("User: " + nme);
+
         feedPanel.add(username);
         feedPanel.add(postPanel);
         feedPanel.add(navPanel);
+        postPanel.add(post);
+        navPanel.add(profile);
+        navPanel.add(refresh);
+
+
+        setTitle("Sweet mail");
+
+
+        this.add(feedPanel);
+        this.setVisible(true);
     }
 }
