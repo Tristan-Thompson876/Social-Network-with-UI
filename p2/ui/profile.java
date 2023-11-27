@@ -25,7 +25,7 @@ public class Profile extends JFrame{
     JButton createPost = new JButton("create post");
     JButton submit = new JButton("Submit");
 
-    JLabel postype = new JLabel("Post type: ");
+    JLabel postype = new JLabel("Post type(Text/ExtrenalLink): ");
     JTextField pstype = new JTextField(11);
     //JCheckBox textCheckBox = new JCheckBox("Text");
     //JCheckBox externalLinkCheckBox = new JCheckBox("External URL");
