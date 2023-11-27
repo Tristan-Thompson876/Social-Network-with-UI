@@ -15,6 +15,8 @@ import p2.Socials;
 
 public class LoginScreen extends JFrame {
     //protected HashMap<String, String> LoginInfo = new HashMap<String, String>();
+    protected JFrame frame;
+
 
     JPanel loginPanelInfo = new JPanel();
     JPanel loginButtoPanel = new JPanel();
@@ -40,6 +42,7 @@ public class LoginScreen extends JFrame {
     Socials social = new Socials("social");
 
     public LoginScreen(){
+        this.frame = this;
         /*this.LoginInfo = LoginInfo;*/
 
         this.setSize(800, 800);
@@ -101,7 +104,8 @@ public class LoginScreen extends JFrame {
                     String mpassword = passwordText.getText();
                     social.login(uname, mpassword);
                     System.out.println("logged in");
-                    new PublicFeed(uname);
+                    new PublicFeed(uname, frame);
+                
                 }
                 else{
 
@@ -122,6 +126,7 @@ public class LoginScreen extends JFrame {
         loginPanel.remove(password);
         loginPanel.remove(passwordText);
         loginButtoPanel.remove(logon);
+        loginButtoPanel.remove(submit);
         //loginButtoPanel.remove(Signup);
 
         loginPanel.add(Su_Panel);
@@ -130,7 +135,7 @@ public class LoginScreen extends JFrame {
         Su_Panel.add(password);
         Su_Panel.add(Su_passwordText);
         loginPanel.add(bButton);
-        loginPanel.add(submit);
+        //loginPanel.add(submit);
         
 
         loginPanel.revalidate();

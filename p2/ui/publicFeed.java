@@ -5,6 +5,8 @@ import javax.swing.*;
 
 import p2.Post;
 import p2.Socials;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PublicFeed extends JFrame{
     String nme;
@@ -20,8 +22,15 @@ public class PublicFeed extends JFrame{
     JLabel post = new JLabel("Post");
     Socials social = new Socials("social");
 
-    public PublicFeed(String name){
+    JFrame loginFrame;
+    public PublicFeed(String name, JFrame loginFrame){
+        this.loginFrame = loginFrame;
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setSize(800, 800);
+        loginFrame.getContentPane().removeAll();
+        loginFrame.revalidate();
+        loginFrame.repaint();
+
         this.nme = name;
         feedPanel.setSize(700, 500);
         this.setSize(800, 800);
@@ -43,6 +52,14 @@ public class PublicFeed extends JFrame{
         
         this.add(feedPanel);
         this.setVisible(true);
+
+
+        profile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Profile(name);
+            }
+        });
     }
 
     public void displayposts(){
