@@ -153,8 +153,9 @@ public abstract class Post implements Comparable<Post> {
 
 	@Override
 	public String toString() {
-		return "";
-	}
+		       // Implement logic for the string representation of the post
+      return "Post ID: " + postID + "\nShared with: " + sharedWith + "\nPopularity Score: " + popularityScore;
+			}
 
 	@Override
 	public int compareTo(Post otherPost) {
