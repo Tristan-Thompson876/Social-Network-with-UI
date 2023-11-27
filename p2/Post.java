@@ -106,6 +106,10 @@ public abstract class Post implements Comparable<Post> {
 		return popularityScore;
 	}
 
+	public Content getContent(){
+		return content;
+	}
+
 	public int getID() {
 		return postID;
 	}

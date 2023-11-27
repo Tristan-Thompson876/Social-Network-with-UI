@@ -72,6 +72,10 @@ public class Socials {
         return postIDs;
 	}
 
+	public ArrayList<Post> getPosts(){
+		return posts;
+	}
+
 	public void addNewSocialsUser(String name, String password) {
 		User u = new User(name, password);
 		users.add(u);
