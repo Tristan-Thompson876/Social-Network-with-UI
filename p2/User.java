@@ -127,24 +127,35 @@ public class User {
 	}
 
 	public boolean unreactToPost(String pstID) {
-		return false;
-	}
+        for (Post p : this.posts) {
+            if (p.getID() == Integer.parseInt(pstID)) {
+                p.removeReaction(this.username);
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public boolean subscribe(String name) {
-		return false;
-	}
+	public boolean subscribe(String name){
+        this.subscribers.add(name);
+        this.subscribed.add(name);
+        return true;
+    }
 
-	public boolean unsubscribe(String name) {
-		return false;
-	}
+	public boolean unsubscribe(String name){
+        this.subscribers.remove(name);
+        return true;
+    }
 
-	public boolean restrict(String name) {
-		return false;
-	}
+	public boolean restrict(String name)  {
+        this.subscribers.remove(name);
+        return true;
+    }
 
-	public boolean unrestrict(String name) {
-		return false;
-	}
+	public boolean unrestrict(String name){
+        this.restricted.remove(name);
+        return true;
+    }
 
 	/**
      * 
@@ -238,13 +249,19 @@ public class User {
 		return username.equals(name);
 	}
 
-	public void displayPost(int pstID) {
-	}
+	public void displayPost(int pstID)  {
+        for (Post p : posts) {
+            if (p.getID() == pstID) {
+                p.display();
+                break;
+            }
+        }
+    }
 
 	@Override
 	public String toString() {
-		return "TBD";
-	}
+        return username + "/" + password + "/" + subscribers + "/" + subscribed + "/" + restricted + "/" + posts;
+    }
 
     public ArrayList<Post> getPosts() {
         return posts;
