@@ -164,4 +164,8 @@ public abstract class Post implements Comparable<Post> {
 
 	public abstract void display();
 
+	public PostType getPostType() {
+		return null;
+	}
+
 }

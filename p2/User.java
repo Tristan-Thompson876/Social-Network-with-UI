@@ -246,4 +246,8 @@ public class User {
 		return "TBD";
 	}
 
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
+
 }

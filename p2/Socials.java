@@ -13,7 +13,7 @@ public class Socials {
 	private String name;
 
 	/* is mutable instance data */
-	private User whoIsLoggedIn = null;
+	protected User whoIsLoggedIn = null;
 	private FeedAlgorithm feedSort;
 	private ArrayList<Post> posts = new ArrayList<Post>();
 	//private ArrayList<Integer> posts = new ArrayList<Integer>();
@@ -76,6 +76,10 @@ public class Socials {
 	public ArrayList<Post> getPosts(){
 		return posts;
 	}
+
+	public User getWhoIsLoggedIn() {
+        return whoIsLoggedIn;
+    }
 
 	public void addNewSocialsUser(String name, String password) {
 		User u = new User(name, password);

@@ -5,10 +5,15 @@ import javax.swing.*;
 
 import p1.enums.PostAudience;
 import p1.enums.PostType;
+import p2.ExternalLinkPost;
+import p2.Post;
 import p2.Socials;
+import p2.TextPost;
+import p2.User;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class Profile extends JFrame{
 
@@ -30,7 +35,7 @@ public class Profile extends JFrame{
     //JCheckBox textCheckBox = new JCheckBox("Text");
     //JCheckBox externalLinkCheckBox = new JCheckBox("External URL");
 
-    JLabel audience = new JLabel("Audience(): ");
+    JLabel audience = new JLabel("Audience(Private/Public/Subscribers): ");
     JTextField aud = new JTextField(11);
     //JCheckBox privateCheckBox = new JCheckBox("Only Owner");
     //JCheckBox publicCheckBox = new JCheckBox("Public, except restricted");
@@ -82,9 +87,11 @@ public class Profile extends JFrame{
 
                     PostType type = PostType.valueOf(posType);
                     PostAudience postAudience = PostAudience.valueOf(audience);
+                    
 
                     social.addNewPost(type, postAudience, content);
                     System.out.println("post sucessfully");
+                    postToPanelForLoggedInUser();
                 
                 }
                 else{
@@ -93,6 +100,7 @@ public class Profile extends JFrame{
             }
         });
 
+        
 
         
         setTitle("Sweet mail");
@@ -105,6 +113,48 @@ public class Profile extends JFrame{
 
         
     }
+    //method to post each post created by the user on the panel
+    public void postToPanelForLoggedInUser() {
+        System.out.println("first");
+        postPanel.removeAll();  // Clear existing components from the postPanel
+        User loggedInUser = social.getWhoIsLoggedIn();
+
+        System.out.println("second");
+        if (loggedInUser != null) {
+            ArrayList<Post> userPosts = loggedInUser.getPosts();
+
+            System.out.println("third");
+            for (Post post : userPosts) {
+                JPanel postContentPanel = new JPanel();
+                postContentPanel.setLayout(new BoxLayout(postContentPanel, BoxLayout.Y_AXIS));
+
+                JLabel typeLabel = new JLabel("Type: " + post.getPostType());
+                JLabel audienceLabel = new JLabel("Audience: " + post.getSharedWith());
+                JLabel contentLabel;
+
+                if (post.getPostType() == PostType.Text) {
+                    contentLabel = new JLabel("Content: " + ((TextPost) post).getContent());
+                } else if (post.getPostType() == PostType.ExtrenalLink) {
+                    contentLabel = new JLabel("Content: " + ((ExternalLinkPost) post).getUrl());
+                } else {
+                    contentLabel = new JLabel("Content: [Unknown post type]");
+                }
+
+                postContentPanel.add(typeLabel);
+                postContentPanel.add(audienceLabel);
+                postContentPanel.add(contentLabel);
+
+                postContentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+                postPanel.add(postContentPanel);
+            }
+
+            // Repaint the postPanel to reflect the changes
+            postPanel.revalidate();
+            postPanel.repaint();
+        }
+    }
+
     private void switchToMakePost() {
         creating = true;
         postPanel.remove(postLabel);
@@ -117,6 +167,25 @@ public class Profile extends JFrame{
         postPanel.add(postContenTextField);
         postPanel.add(submit);
         
+        
+
+        postPanel.revalidate();
+        postPanel.repaint();
+        }
+
+
+
+        private void switchBack() {
+        creating = false;
+        postPanel.remove(postype);
+        postPanel.remove(pstype);
+        postPanel.remove(audience);
+        postPanel.remove(aud);
+        postPanel.remove(content);
+        postPanel.remove(postContenTextField);
+        postPanel.remove(submit);
+
+        postPanel.add(postLabel);
         
 
         postPanel.revalidate();

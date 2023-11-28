@@ -114,4 +114,8 @@ public class ExternalLinkPost extends Post {
 
 	}
 
+    public String getUrl() {
+        return null;
+    }
+
 }
