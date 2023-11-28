@@ -69,7 +69,8 @@ public class Profile extends JFrame{
         postPanel.add(postLabel);
 
         BoxLayout boxlayout = new BoxLayout(profilePanel, BoxLayout.Y_AXIS);
-        profilePanel.setBorder(new EmptyBorder(new Insets(100, 300, 100, 300))); 
+        profilePanel.setBorder(new EmptyBorder(new Insets(100, 200, 100, 200))); 
+       
         
 
        
@@ -124,6 +125,7 @@ public class Profile extends JFrame{
         System.out.println("third");
         for (Post post : userPosts) {
             JPanel postContentPanel = new JPanel();
+            BoxLayout boxlayout = new BoxLayout(aboutPanel, BoxLayout.Y_AXIS);
             postContentPanel.setLayout(new BoxLayout(postContentPanel, BoxLayout.Y_AXIS));
 
             JLabel typeLabel = new JLabel("Type: " + post.getPostType());
@@ -155,8 +157,18 @@ public class Profile extends JFrame{
 
     private void switchToMakePost() {
         creating = true;
+       
         postPanel.remove(postLabel);
+        profilePanel.setLayout(new BorderLayout());
+        profilePanel.add(aboutPanel, BorderLayout.PAGE_START);
+        profilePanel.add(postPanel, BorderLayout.CENTER);
 
+        /*
+        BoxLayout boxlayout1 = new BoxLayout(aboutPanel, BoxLayout.Y_AXIS);
+        aboutPanel.setBorder(new EmptyBorder(new Insets(100, 300, 200, 300))); 
+        BoxLayout boxlayout2 = new BoxLayout(postPanel, BoxLayout.Y_AXIS);
+        postPanel.setBorder(new EmptyBorder(new Insets(100, 300, 200, 300))); 
+*/
         postPanel.add(postype);
         postPanel.add(pstype);
         postPanel.add(audience);
