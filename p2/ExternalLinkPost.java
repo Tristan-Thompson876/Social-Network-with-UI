@@ -69,18 +69,7 @@ public class ExternalLinkPost extends Post {
         return f;
     }
 
-    public static void main(String[] args) {
-        testURL("://www.jovatpoint.com/URL-class");
-        testURL("https://www.jovatpoint.com/URL-class");
-        testURL("https://www.javatpoint.com/URL-class");
-    }
-
-    private static void testURL(String url) {
-        ExternalLinkPost elp = new ExternalLinkPost(PostAudience.Public, url);
-        if (elp.urlIsValid() && elp.urlExists()) {
-            elp.display();
-        } else {
-            System.out.println("URL invalid or does not exist: " + url);
-        }
-    }
+	public String getUrl() {
+		return null;
+	}
 }
