@@ -54,15 +54,31 @@ public class PublicFeed extends JFrame{
         this.setVisible(true);
 
 
-        profile.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Profile(name);
-            }
-        });
-    }
+       // Action listeners
+       profile.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new Profile(name);
+        }
+    });
+
+    refresh.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            displayposts(); // Refresh the posts
+        }
+    });
+
+    displayposts(); // Load posts when frame is initialized
+}
+
+
+    } 
+
+   
 
     public void displayposts(){
+         postPanel.removeAll();//clear existing panels
         for (Post post : social.getPosts()) {
         // Create a JLabel for each post
         JLabel postLabel = new JLabel("Post ID: " + post.getID() + ", Content: " + post.getContent());
