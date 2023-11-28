@@ -9,7 +9,7 @@ import p2.Socials;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class publicFeed extends JFrame{
+public class PublicFeed extends JFrame{
     String nme;
     String id;
     JPanel postPanel = new JPanel();
@@ -28,7 +28,7 @@ public class publicFeed extends JFrame{
     JTextField search = new JTextField(11);
 
     JFrame loginFrame;
-    public publicFeed(String name, JFrame loginFrame){
+    public PublicFeed(String name, JFrame loginFrame){
         this.loginFrame = loginFrame;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setSize(800, 800);
