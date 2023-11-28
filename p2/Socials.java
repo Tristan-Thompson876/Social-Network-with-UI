@@ -33,6 +33,7 @@ public class Socials {
 
 	private void addNewSocialsPost(int pstID) {
 
+
 	}
 
 	public void removeSocialsPost(int pstID) {
@@ -157,29 +158,49 @@ public class Socials {
 	//
 
 	/* whoIsLoggedIn deletes a post they own */
-	public boolean deletePost(int pstID) {
-		return false;
-	}
+	public boolean deletePost(int pstID)  {
+        if (whoIsLoggedIn != null) {
+            if (whoIsLoggedIn.isPostOwner(pstID)) {
+                whoIsLoggedIn.deletePost(pstID);
+                removeSocialsPost(pstID);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 	/* whoIsLoggedIn reacts to post, they should not be the owner of the post */
 	public boolean reactToPost(String pstID, ReactionType vote) {
-		return false;
-	}
+        if (whoIsLoggedIn != null) {
+            return whoIsLoggedIn.reactToPost(pstID,whoIsLoggedIn.toString().split("/")[0], vote);
+        }
+        return false;
+    }
 
 	/* whoIsLoggedIn unreacts to post, they should not be the owner of the post */
-	public boolean unreactToPost(String pstID) {
-		return false;
-	}
+	public boolean unreactToPost(String pstID)  {
+        if (whoIsLoggedIn != null) {
+            return whoIsLoggedIn.unreactToPost(pstID);
+        }
+        return false;
+    }
 
 	/* whoIsLoggedIn becomes a subscriber of another user */
 	public boolean subscribe(String name) {
-		return false;
-	}
+        if (whoIsLoggedIn != null) {
+            return whoIsLoggedIn.subscribe(name);
+        }
+        return false;
+    }
 
 	/* whoIsLoggedIn unsubscribes from another user */
-	public boolean unsubscribe(String name) {
-		return false;
-	}
+	public boolean unsubscribe(String name){
+        if (whoIsLoggedIn != null) {
+            return whoIsLoggedIn.unsubscribe(name);
+        }
+        return false;
+    }
 
 	/* whoIsLoggedIn restricts user with name */
 	public boolean restrict(String name) {
