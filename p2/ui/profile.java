@@ -139,6 +139,7 @@ public class Profile extends JFrame{
             } else {
                 contentLabel = new JLabel("Content: [Unknown post type]");
             }
+            Showposts();
 
             postContentPanel.add(typeLabel);
             postContentPanel.add(audienceLabel);
@@ -154,6 +155,16 @@ public class Profile extends JFrame{
         postPanel.repaint();
     }
     }
+
+    public void Showposts(){
+        for (Post post : social.getPosts()) {
+        // Create a JLabel for each post
+        JLabel postLabel = new JLabel("Post ID: " + post.getID() + ", Content: " + post.getContent());
+        
+        // Add the JLabel to the postPanel
+        postPanel.add(postLabel);}
+    }
+
 
     private void switchToMakePost() {
         creating = true;

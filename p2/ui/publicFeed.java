@@ -9,7 +9,7 @@ import p2.Socials;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PublicFeed extends JFrame{
+public class publicFeed extends JFrame{
     String nme;
     String id;
     JPanel postPanel = new JPanel();
@@ -28,7 +28,7 @@ public class PublicFeed extends JFrame{
     JTextField search = new JTextField(11);
 
     JFrame loginFrame;
-    public PublicFeed(String name, JFrame loginFrame){
+    public publicFeed(String name, JFrame loginFrame){
         this.loginFrame = loginFrame;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setSize(800, 800);
@@ -65,31 +65,15 @@ public class PublicFeed extends JFrame{
         this.setVisible(true);
 
 
-       // Action listeners
-       profile.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            new Profile(name);
-        }
-    });
+        profile.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Profile(name);
+            }
+        });
+    }
 
-    refresh.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            displayposts(); // Refresh the posts
-        }
-    });
-
-    displayposts(); // Load posts when frame is initialized
-}
-
-
-    } 
-
-   
-
-    public void displayposts(){
-         postPanel.removeAll();//clear existing panels
+    public void Showposts(){
         for (Post post : social.getPosts()) {
         // Create a JLabel for each post
         JLabel postLabel = new JLabel("Post ID: " + post.getID() + ", Content: " + post.getContent());
@@ -102,4 +86,5 @@ public class PublicFeed extends JFrame{
     postPanel.revalidate();
     postPanel.repaint();
     }
+    
 }
