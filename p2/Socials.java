@@ -203,52 +203,84 @@ public class Socials {
     }
 
 	/* whoIsLoggedIn restricts user with name */
-	public boolean restrict(String name) {
-		return false;
-	}
+	public boolean restrict(String name)  {
+        if (whoIsLoggedIn != null) {
+            return whoIsLoggedIn.restrict(name);
+        }
+        return false;
+    }
 
 	/* whoIsLoggedIn unrestricts user with name */
 	public boolean unrestrict(String name) {
-		return false;
-	}
+        if (whoIsLoggedIn != null) {
+            return whoIsLoggedIn.unrestrict(name);
+        }
+        return false;
+    }
 
 	/* checks if name is a subscriber of whoIsLoggedIn */
-	public boolean isASubscriber(String name) {
-		return false;
-	}
+	public boolean isASubscriber(String name)  {
+        if (whoIsLoggedIn != null) {
+            return whoIsLoggedIn.isASubscriber(name);
+        }
+        return false;
+    }
 
 	/* check if whoIsLoggedIn is a subscriber of user with name */
 	public boolean isSubscribedTo(String name) {
-		return false;
-	}
+        if (whoIsLoggedIn != null) {
+            return whoIsLoggedIn.isSubscribedTo(name);
+        }
+        return false;
+    }
 
 	/* checks if whoIsLoggedIn has restricted user with name */
 	public boolean isRestricted(String name) {
-		return false;
-	}
+        if (whoIsLoggedIn != null) {
+            return whoIsLoggedIn.isRestricted(name);
+        }
+        return false;
+    }
 
 	/* checks if user with name has access to post with pstID of whoIsLoggedIn */
-	public boolean hasAccesstoPost(String name, int pstID) {
-		return false;
-	}
+	public boolean hasAccesstoPost(String name, int pstID)  {
+        if (whoIsLoggedIn != null) {
+            return whoIsLoggedIn.hasAccesstoPost(name, pstID);
+        }
+        return false;
+    }
 
 	/* checks if whoIsLoggedIn is owner of post with pstID */
-	public boolean isPostOwner(int pstID) {
-		return false;
-	}
+	public boolean isPostOwner(int pstID)  {
+        if (whoIsLoggedIn != null) {
+            return whoIsLoggedIn.isPostOwner(pstID);
+        }
+        return false;
+    }
 
 	/* returns the subscribers that have access to whoIsLoggedIn post with pstID */
-	public ArrayList<String> subscribersWithAccessToPost(int pstID) {
-		return new ArrayList<String>();
-	}
+	public ArrayList<String> subscribersWithAccessToPost(int pstID){
+        if (whoIsLoggedIn != null) {
+            return whoIsLoggedIn.subscribersWithAccessToPost(pstID);
+        }
+        return new ArrayList<String>();
+    }
 
 	/* displays post with pstID */
 	public void displayPost(int pstID) {
-	}
+        for (User u : users) {
+            if (u.isPostOwner(pstID)) {
+                u.displayPost(pstID);
+                break;
+            }
+        }
+    }
 
 	@Override
-	public String toString() {
-		return "TBD";
-	}
+	public String toString(){
+        return "Socials Name: " + name + "\nSocials Feed Sort: " + feedSort +
+               "\nAll Socials Users: " + getAllSocialsUsers() +
+               "\nAll Socials Posts: " + getAllSocialsPosts();
+    }
 
 }

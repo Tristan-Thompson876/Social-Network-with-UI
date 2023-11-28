@@ -115,7 +115,7 @@ public class User {
      * @param pstID
      * @param vote
      */
-	public boolean reactToPost(String pstID, ReactionType vote) {
+	public boolean reactToPost(String pstID, String reactor, ReactionType vote) {
         for(Post p : posts){
             if(p.getID() == Integer.parseInt(pstID)){
                 String username = p.getUsername().getUname();  
