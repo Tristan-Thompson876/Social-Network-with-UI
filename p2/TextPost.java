@@ -20,8 +20,19 @@ public class TextPost extends Post {
 
 	@Override
 	public String toString() {
-		return "TBD";
+		StringBuilder postContentsBuilder = new StringBuilder();
+		for (Content contentItem : contents) {
+			postContentsBuilder.append(contentItem).append(System.lineSeparator());
+		}
+	
+		return "TextPost Details: {" +
+				"ID=" + getID() +
+				", Shared With=" + getSharedWith() +
+				", Popularity Score=" + getPopularityScore() +
+				", Post Contents:\n" + postContentsBuilder.toString() +
+				'}';
 	}
+	
 
 	public void display() {
 	}

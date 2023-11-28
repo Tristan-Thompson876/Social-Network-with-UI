@@ -158,9 +158,10 @@ public abstract class Post implements Comparable<Post> {
 			}
 
 	@Override
-	public int compareTo(Post otherPost) {
-		return 0;
-	}
+	public int compareTo(Post otherPost)  {
+        // Implement logic for comparing posts based on popularity score
+        return Integer.compare(otherPost.getPopularityScore(), this.getPopularityScore());
+    }
 
 	public abstract void display();
 
