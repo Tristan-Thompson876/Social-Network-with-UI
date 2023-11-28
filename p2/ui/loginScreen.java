@@ -22,10 +22,9 @@ public class LoginScreen extends JFrame {
     JPanel loginButtoPanel = new JPanel();
     JPanel loginPanel = new JPanel();
     JPanel Su_Panel = new JPanel();
-    JButton logon = new JButton("login");
     JButton Signup = new JButton("sign up");
     JButton bButton = new JButton("Back");
-    JButton submit = new JButton("Submit");
+    JButton submit = new JButton("login");
 
     //labels
     JLabel username = new JLabel("UserName");
@@ -57,20 +56,15 @@ public class LoginScreen extends JFrame {
         loginPanel.add(passwordText);
         //loginPanel.add(loginPanelInfo);
         loginPanel.add(loginButtoPanel);
-        loginButtoPanel.add(logon);
-        loginButtoPanel.add(Signup);
+        //loginButtoPanel.add(logon);
         loginButtoPanel.add(submit);
+        loginButtoPanel.add(Signup);
         loginPanel.add(Su_Panel);
 
         BoxLayout boxlayout = new BoxLayout(loginPanel, BoxLayout.Y_AXIS);
         loginPanel.setBorder(new EmptyBorder(new Insets(100, 300, 200, 300))); 
         setTitle("Sweet mail");
-        logon.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                logOnInfo();
-            }
-        });
+        
 
         bButton.addActionListener(new ActionListener() {
             @Override
@@ -125,9 +119,9 @@ public class LoginScreen extends JFrame {
         loginPanel.remove(unameText);
         loginPanel.remove(password);
         loginPanel.remove(passwordText);
-        loginButtoPanel.remove(logon);
+        //loginButtoPanel.remove(logon);
         loginButtoPanel.remove(submit);
-        //loginButtoPanel.remove(Signup);
+        loginPanel.remove(Signup);
 
         loginPanel.add(Su_Panel);
         Su_Panel.add(username);
@@ -135,6 +129,7 @@ public class LoginScreen extends JFrame {
         Su_Panel.add(password);
         Su_Panel.add(Su_passwordText);
         loginPanel.add(bButton);
+        loginPanel.add(Signup);
         //loginPanel.add(submit);
         
 
@@ -151,12 +146,14 @@ public class LoginScreen extends JFrame {
         loginPanel.remove(Su_passwordText);
         loginPanel.remove(bButton);
 
+        
         loginPanel.add(username);
         loginPanel.add(unameText);
         loginPanel.add(password);
         loginPanel.add(passwordText);
         loginPanel.add(submit);
-        loginButtoPanel.add(logon);
+        loginPanel.add(loginButtoPanel);
+        //loginButtoPanel.add(logon);
         loginButtoPanel.add(Signup);
         
         

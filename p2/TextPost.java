@@ -6,7 +6,8 @@ import p1.enums.PostAudience;
 
 public class TextPost extends Post {
 	// immutable instance data
-	private ArrayList<Content> contents;
+	//private ArrayList<Content> contents;
+	private ArrayList<Content> contents = new ArrayList<>();
 
 	public TextPost(PostAudience sharedWith, String... contents) {
 		super(sharedWith);

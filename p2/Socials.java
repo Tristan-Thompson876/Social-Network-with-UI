@@ -11,6 +11,7 @@ public class Socials {
 
 	/* is immutable instance data, i.e., once set cannot be changed */
 	private String name;
+	private User user;
 
 	/* is mutable instance data */
 	protected User whoIsLoggedIn = null;
@@ -18,7 +19,7 @@ public class Socials {
 	private ArrayList<Post> posts = new ArrayList<Post>();
 	//private ArrayList<Integer> posts = new ArrayList<Integer>();
 	private ArrayList<User> users = new ArrayList<User>();
-	private ArrayList dnames = new ArrayList<String>();
+	private ArrayList<String> dnames = new ArrayList<String>();
 
 	public Socials(String name) {
 		this.name = name;
@@ -72,6 +73,10 @@ public class Socials {
         }
         return postIDs;
 	}
+	
+	public User getUser(){
+		return user;
+	}
 
 	public ArrayList<Post> getPosts(){
 		return posts;
@@ -105,7 +110,7 @@ public class Socials {
 	 */
 	public boolean login(String username, String password) {
 		for(User u : users){
-			if(u.getUname() == username && u.getPassword() == password ){
+			if(u.getUname().equals(username) && u.getPassword().equals(password)){
 				whoIsLoggedIn = u;
 				return true;
 			}

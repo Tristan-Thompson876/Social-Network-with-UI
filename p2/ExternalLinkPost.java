@@ -35,9 +35,7 @@ public class ExternalLinkPost extends Post {
 		try {
 			new URL(url.toString()).toURI();
 			return true;
-		} catch (MalformedURLException e) {
-			return false;
-		} catch (URISyntaxException e) {
+		} catch (MalformedURLException | URISyntaxException e) {
 			return false;
 		}
 	}
@@ -45,21 +43,13 @@ public class ExternalLinkPost extends Post {
 	// can be used to test if a URL exists
 	// from https://www.baeldung.com/java-check-url-exists
 	public boolean urlExists() {
-		URL urlchk = null;
-		HttpURLConnection huc = null;
-		int responseCode = 0;
-
 		try {
-			urlchk = new URL(url.toString());
-			huc = (HttpURLConnection) urlchk.openConnection();
-			responseCode = huc.getResponseCode();
-		} catch (MalformedURLException e) {
-			return false;
+			URL urlchk = new URL(url.toString());
+			HttpURLConnection huc = (HttpURLConnection) urlchk.openConnection();
+			return huc.getResponseCode() == HttpURLConnection.HTTP_OK;
 		} catch (IOException e) {
 			return false;
 		}
-
-		return HttpURLConnection.HTTP_OK == responseCode;
 	}
 
 	// from

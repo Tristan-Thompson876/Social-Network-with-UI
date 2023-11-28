@@ -2,6 +2,7 @@ package p2.ui;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import p1.enums.PostAudience;
 import p1.enums.PostType;
@@ -66,6 +67,9 @@ public class Profile extends JFrame{
 
 
         postPanel.add(postLabel);
+
+        BoxLayout boxlayout = new BoxLayout(profilePanel, BoxLayout.Y_AXIS);
+        profilePanel.setBorder(new EmptyBorder(new Insets(100, 300, 100, 300))); 
         
 
        
@@ -101,58 +105,52 @@ public class Profile extends JFrame{
         });
 
         
-
-        
         setTitle("Sweet mail");
-
-        
-        
+                
         this.add(profilePanel);
         this.setVisible(true);
-
-
-        
+       
     }
     //method to post each post created by the user on the panel
     public void postToPanelForLoggedInUser() {
         System.out.println("first");
-        postPanel.removeAll();  // Clear existing components from the postPanel
-        User loggedInUser = social.getWhoIsLoggedIn();
+    postPanel.removeAll();  // Clear existing components from the postPanel
+    User loggedInUser = social.getWhoIsLoggedIn();
 
-        System.out.println("second");
-        if (loggedInUser != null) {
-            ArrayList<Post> userPosts = loggedInUser.getPosts();
+    System.out.println("second");
+    if (loggedInUser != null) {
+        ArrayList<Post> userPosts = loggedInUser.getPosts();
 
-            System.out.println("third");
-            for (Post post : userPosts) {
-                JPanel postContentPanel = new JPanel();
-                postContentPanel.setLayout(new BoxLayout(postContentPanel, BoxLayout.Y_AXIS));
+        System.out.println("third");
+        for (Post post : userPosts) {
+            JPanel postContentPanel = new JPanel();
+            postContentPanel.setLayout(new BoxLayout(postContentPanel, BoxLayout.Y_AXIS));
 
-                JLabel typeLabel = new JLabel("Type: " + post.getPostType());
-                JLabel audienceLabel = new JLabel("Audience: " + post.getSharedWith());
-                JLabel contentLabel;
+            JLabel typeLabel = new JLabel("Type: " + post.getPostType());
+            JLabel audienceLabel = new JLabel("Audience: " + post.getSharedWith());
+            JLabel contentLabel;
 
-                if (post.getPostType() == PostType.Text) {
-                    contentLabel = new JLabel("Content: " + ((TextPost) post).getContent());
-                } else if (post.getPostType() == PostType.ExtrenalLink) {
-                    contentLabel = new JLabel("Content: " + ((ExternalLinkPost) post).getUrl());
-                } else {
-                    contentLabel = new JLabel("Content: [Unknown post type]");
-                }
-
-                postContentPanel.add(typeLabel);
-                postContentPanel.add(audienceLabel);
-                postContentPanel.add(contentLabel);
-
-                postContentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-
-                postPanel.add(postContentPanel);
+            if (post.getPostType() == PostType.Text) {
+                contentLabel = new JLabel("Content: " + ((TextPost) post).getContent());
+            } else if (post.getPostType() == PostType.ExtrenalLink) {
+                contentLabel = new JLabel("Content: " + ((ExternalLinkPost) post).getUrl());
+            } else {
+                contentLabel = new JLabel("Content: [Unknown post type]");
             }
 
-            // Repaint the postPanel to reflect the changes
-            postPanel.revalidate();
-            postPanel.repaint();
+            postContentPanel.add(typeLabel);
+            postContentPanel.add(audienceLabel);
+            postContentPanel.add(contentLabel);
+
+            postContentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+
+            postPanel.add(postContentPanel);
         }
+
+        // Repaint the postPanel to reflect the changes
+        postPanel.revalidate();
+        postPanel.repaint();
+    }
     }
 
     private void switchToMakePost() {

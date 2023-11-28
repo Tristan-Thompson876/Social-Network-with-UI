@@ -78,6 +78,7 @@ public class User {
         if (newPost != null) {
             newPost.setPostID(postId);
             // updatePostAccess(newPost);
+            
             posts.add(newPost);
     
             return newPost;
