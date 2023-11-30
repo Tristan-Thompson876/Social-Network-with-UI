@@ -6,6 +6,8 @@ import javax.swing.border.EmptyBorder;
 
 import p2.Post;
 import p2.Socials;
+import p2.User;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -28,8 +30,9 @@ public class PublicFeed extends JFrame{
     JTextField search = new JTextField(11);
 
     JFrame loginFrame;
-    public PublicFeed(String name, JFrame loginFrame){
+    public PublicFeed(String name, JFrame loginFrame, Socials social){
         this.loginFrame = loginFrame;
+        this.social = social;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setSize(800, 800);
         loginFrame.getContentPane().removeAll();
@@ -68,18 +71,14 @@ public class PublicFeed extends JFrame{
         profile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Profile(name);
+                new Profile(name, social);
             }
         });
     }
 
     public void Showposts(){
         for (Post post : social.getPosts()) {
-        // Create a JLabel for each post
-        JLabel postLabel = new JLabel("Post ID: " + post.getID() + ", Content: " + post.getContent());
         
-        // Add the JLabel to the postPanel
-        postPanel.add(postLabel);
     }
 
     // Refresh the display

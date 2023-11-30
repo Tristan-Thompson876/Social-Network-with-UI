@@ -25,22 +25,25 @@ public class Profile extends JFrame{
     JPanel navPanel = new JPanel();
     JPanel m1 = new JPanel();
     JPanel m2 = new JPanel();
-    Socials social = new Socials("social");
+    Socials social;
 
     JButton publicFeedButton = new JButton("feed");
     JButton createPost = new JButton("create post");
     JButton submit = new JButton("Submit");
 
-    JLabel postype = new JLabel("Post type(Text/ExtrenalLink): ");
-    JTextField pstype = new JTextField(11);
-    //JCheckBox textCheckBox = new JCheckBox("Text");
-    //JCheckBox externalLinkCheckBox = new JCheckBox("External URL");
+    JLabel postype = new JLabel("Post type: ");
+    JCheckBox pstype = new JCheckBox("Text");
+    JCheckBox pstype1 = new JCheckBox("External Link");
+    
+    ButtonGroup postTypeGroup = new ButtonGroup();
 
-    JLabel audience = new JLabel("Audience(Private/Public/Subscribers): ");
-    JTextField aud = new JTextField(11);
-    //JCheckBox privateCheckBox = new JCheckBox("Only Owner");
-    //JCheckBox publicCheckBox = new JCheckBox("Public, except restricted");
-    //JCheckBox subscribersCheckBox = new JCheckBox("Subscribers");
+    JLabel audience = new JLabel("Audience: ");
+    JCheckBox aud = new JCheckBox("Private");
+    JCheckBox aud2 = new JCheckBox("Public");
+    JCheckBox aud3 = new JCheckBox("Subscribers");
+
+    ButtonGroup audienceGroup = new ButtonGroup();
+
 
     JLabel content = new JLabel("Content");
     JTextField postContenTextField = new JTextField(11);
@@ -49,9 +52,10 @@ public class Profile extends JFrame{
     JLabel uname = new JLabel("Username: ");
     JLabel postLabel = new JLabel("Post: ");
     
-    public Profile(String name){
+    public Profile(String name, Socials social){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.nme = name;
+        this.social = social;
         profilePanel.setSize(700, 500);
         this.setSize(800, 800);
         profilePanel.setBackground(Color.decode("#00001a"));
@@ -59,6 +63,13 @@ public class Profile extends JFrame{
         uname.setText("User: " + nme);
 
       
+        postTypeGroup.add(pstype);
+        postTypeGroup.add(pstype1);
+
+        audienceGroup.add(aud);
+        audienceGroup.add(aud2);
+        audienceGroup.add(aud3);
+
         aboutPanel.add(createPost);
         aboutPanel.add(publicFeedButton);
         profilePanel.add(aboutPanel);
@@ -71,9 +82,7 @@ public class Profile extends JFrame{
         BoxLayout boxlayout = new BoxLayout(profilePanel, BoxLayout.Y_AXIS);
         profilePanel.setBorder(new EmptyBorder(new Insets(100, 200, 100, 200))); 
        
-        
 
-       
 
         createPost.addActionListener(new ActionListener() {
             @Override
@@ -82,28 +91,45 @@ public class Profile extends JFrame{
             }
         });
 
-        submit.addActionListener(new ActionListener(){
+        submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(creating){
-                    String posType = pstype.getText();
-                    String audience = aud.getText();
+                if (creating) {
+                    // Use isSelected to check which checkbox is selected for post type
+                    String postType = "";
+                    if (pstype.isSelected()) {
+                        postType = PostType.Text.name();
+                    } else if (pstype1.isSelected()) {
+                        postType = PostType.ExtrenalLink.name();
+                    }
+        
+                    String audience = "";
+                    if (aud.isSelected()) {
+                        audience = PostAudience.Private.name();
+                    } else if (aud2.isSelected()) {
+                        audience = PostAudience.Public.name();
+                    } else if (aud3.isSelected()) {
+                        audience = PostAudience.Subscribers.name();
+                    }
                     String content = postContenTextField.getText();
-
-                    PostType type = PostType.valueOf(posType);
-                    PostAudience postAudience = PostAudience.valueOf(audience);
-                    
-
-                    social.addNewPost(type, postAudience, content);
-                    System.out.println("post sucessfully");
-                    postToPanelForLoggedInUser();
-                
-                }
-                else{
-
+        
+                    if (postType != null && !postType.isEmpty()) {
+                        PostType type = PostType.valueOf(postType);
+                        PostAudience postAudience = PostAudience.valueOf(audience);
+        
+                        social.addNewPost(type, postAudience, content);
+                        System.out.println("post successfully");
+                        postToPanelForLoggedInUser();
+                    } else {
+                        System.out.println("Invalid post type");
+                    }
+                } else {
+                    // Handle other actions if not in creating mode
                 }
             }
         });
+        
+        
 
         
         setTitle("Sweet mail");
@@ -120,6 +146,7 @@ public class Profile extends JFrame{
 
     System.out.println("second");
     if (loggedInUser != null) {
+    System.out.println("second"); 
         ArrayList<Post> userPosts = loggedInUser.getPosts();
 
         System.out.println("third");
@@ -139,7 +166,7 @@ public class Profile extends JFrame{
             } else {
                 contentLabel = new JLabel("Content: [Unknown post type]");
             }
-            Showposts();
+           
 
             postContentPanel.add(typeLabel);
             postContentPanel.add(audienceLabel);
@@ -154,15 +181,6 @@ public class Profile extends JFrame{
         postPanel.revalidate();
         postPanel.repaint();
     }
-    }
-
-    public void Showposts(){
-        for (Post post : social.getPosts()) {
-        // Create a JLabel for each post
-        JLabel postLabel = new JLabel("Post ID: " + post.getID() + ", Content: " + post.getContent());
-        
-        // Add the JLabel to the postPanel
-        postPanel.add(postLabel);}
     }
 
 
@@ -182,8 +200,11 @@ public class Profile extends JFrame{
 */
         postPanel.add(postype);
         postPanel.add(pstype);
+        postPanel.add(pstype1);
         postPanel.add(audience);
         postPanel.add(aud);
+        postPanel.add(aud2);
+        postPanel.add(aud3);
         postPanel.add(content);
         postPanel.add(postContenTextField);
         postPanel.add(submit);
@@ -193,8 +214,6 @@ public class Profile extends JFrame{
         postPanel.revalidate();
         postPanel.repaint();
         }
-
-
 
         private void switchBack() {
         creating = false;

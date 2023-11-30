@@ -35,6 +35,9 @@ public class TextPost extends Post {
 	}
 	
 
-	public void display() {
-	}
+	@Override
+    public void display() {
+        // Implement display logic using the toString method
+        System.out.println(toString());
+    }
 }

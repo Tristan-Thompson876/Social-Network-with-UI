@@ -14,12 +14,13 @@ public class Socials {
 	private User user;
 
 	/* is mutable instance data */
-	protected User whoIsLoggedIn = null;
+	protected User whoIsLoggedIn;
 	private FeedAlgorithm feedSort;
 	private ArrayList<Post> posts = new ArrayList<Post>();
 	//private ArrayList<Integer> posts = new ArrayList<Integer>();
 	private ArrayList<User> users = new ArrayList<User>();
 	private ArrayList<String> dnames = new ArrayList<String>();
+	private User u;
 
 	public Socials(String name) {
 		this.name = name;
@@ -85,10 +86,16 @@ public class Socials {
 	public User getWhoIsLoggedIn() {
         return whoIsLoggedIn;
     }
+	
+	public void setWhoIsLoggedIn(User u){
+		this.u = u;
+	}
 
 	public void addNewSocialsUser(String name, String password) {
 		User u = new User(name, password);
 		users.add(u);
+		setWhoIsLoggedIn(u);
+		//whoIsLoggedIn = u;
 	}
 
 	public void removeSocialsUser(String name) {

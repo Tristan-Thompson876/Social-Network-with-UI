@@ -16,8 +16,11 @@ import p2.Socials;
 public class LoginScreen extends JFrame {
     //protected HashMap<String, String> LoginInfo = new HashMap<String, String>();
     protected JFrame frame;
+    Socials social;
+    
 
 
+    
     JPanel loginPanelInfo = new JPanel();
     JPanel loginButtoPanel = new JPanel();
     JPanel loginPanel = new JPanel();
@@ -38,10 +41,11 @@ public class LoginScreen extends JFrame {
 
     //private ArrayList<User> user = new ArrayList<User>();
     private boolean isSignUp = false;
-    Socials social = new Socials("social");
+   
 
-    public LoginScreen(){
+    public LoginScreen(Socials social){
         this.frame = this;
+        this.social = social;
         /*this.LoginInfo = LoginInfo;*/
 
         this.setSize(800, 800);
@@ -80,9 +84,10 @@ public class LoginScreen extends JFrame {
 
                 String uname = Su_unameText.getText();
                 String mpassword = Su_passwordText.getText();
-                Socials social = new Socials("social");
+                //Socials social = new Socials("social");
 
                 // Perform signup logic here
+                System.out.println(social.getWhoIsLoggedIn()+"thank you");
                 social.addNewSocialsUser(uname, mpassword);
                 System.out.println("names:" + social.getAllSocialsUsers());
                 //switchToLogin();
@@ -96,9 +101,12 @@ public class LoginScreen extends JFrame {
                 if(isSignUp == false){
                     String uname = unameText.getText();
                     String mpassword = passwordText.getText();
-                    social.login(uname, mpassword);
-                    System.out.println("logged in");
-                    new PublicFeed(uname, frame);
+                    if(social.isSocialsUser(uname) == true){
+                        social.login(uname, mpassword);
+                        //social.isSocialsUser(uname);
+                        System.out.println("logged in");
+                        new PublicFeed(uname, frame, social );
+                    }
                 
                 }
                 else{
@@ -178,7 +186,8 @@ public class LoginScreen extends JFrame {
     }
 
     public static void main(String[] args) {
-        new LoginScreen();
+        Socials social = new Socials("social");
+        new LoginScreen(social);
     }
 
 }
