@@ -87,9 +87,7 @@ public class LoginScreen extends JFrame {
                 //Socials social = new Socials("social");
 
                 // Perform signup logic here
-                System.out.println(social.getWhoIsLoggedIn()+"thank you");
                 social.addNewSocialsUser(uname, mpassword);
-                System.out.println("names:" + social.getAllSocialsUsers());
                 //switchToLogin();
                 System.out.println("Signed up");
                 }
@@ -103,6 +101,7 @@ public class LoginScreen extends JFrame {
                     String mpassword = passwordText.getText();
                     if(social.isSocialsUser(uname) == true){
                         social.login(uname, mpassword);
+                        System.out.println(social.getWhoIsLoggedIn().getUname()+" thank you");
                         //social.isSocialsUser(uname);
                         System.out.println("logged in");
                         new PublicFeed(uname, frame, social );

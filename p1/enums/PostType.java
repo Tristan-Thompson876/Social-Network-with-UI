@@ -2,7 +2,7 @@ package p1.enums;
 
 public enum PostType {
 
-	Text("Text"), ExtrenalLink("External URL");
+	Text("Text"), ExternalLink("External URL");
 
 	private String description;
 

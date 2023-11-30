@@ -71,7 +71,7 @@ public class User {
     
         if (type == PostType.Text) {
             newPost = new TextPost(sharedWith, contents);
-        } else if (type == PostType.ExtrenalLink) {
+        } else if (type == PostType.ExternalLink) {
             newPost = new ExternalLinkPost(sharedWith, contents[0]);
         }
     
@@ -93,7 +93,7 @@ public class User {
         
         if (type == PostType.Text) {
             newPost = new TextPost(sharedWith, contents);
-        }else if (type == PostType.ExtrenalLink) {
+        }else if (type == PostType.ExternalLink) {
             newPost = new ExternalLinkPost(sharedWith, contents[0]);
             
         posts.add(newPost);
