@@ -6,6 +6,10 @@ import p1.enums.PostAudience;
 import p1.enums.PostType;
 import p1.enums.ReactionType;
 
+/**
+ * Represents a user in a social media platform.
+ * This class manages user details, posts, and interactions with other users.
+ */
 public class User {
 
 	// immutable instance data
@@ -23,7 +27,13 @@ public class User {
     //private Content content;
 
 
-	public User(String username, String password) {
+	/**
+     * Constructs a new User with a username and password.
+     * 
+     * @param username The username of the user.
+     * @param password The password of the user.
+     */
+    public User(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
@@ -50,6 +60,13 @@ public class User {
         this.postType = postType;
     }
 
+    /**
+     * Attempts to log in the user with the given username and password.
+     * 
+     * @param uname The username to log in with.
+     * @param pword The password to log in with.
+     * @return True if the login credentials match, false otherwise.
+     */
 	public boolean login(String uname, String pword) {
         return username.equals(uname) && password.equals(pword);
 	}
@@ -58,7 +75,14 @@ public class User {
     private int generatePostId() {
         return ++postCounter;
     }
-
+/**
+     * Adds a new post of specified type and audience by the user.
+     * 
+     * @param type The type of the post.
+     * @param sharedWith The audience with whom the post is shared.
+     * @param contents The content of the post.
+     * @return The newly created Post object.
+     */
     public Post addNewPostu(PostType type, PostAudience sharedWith, String[] contents) {
         if (!isLoggedIn()) {
             System.out.println("User is not logged in. Cannot add a new post.");
@@ -126,7 +150,12 @@ public class User {
         }
         return false;
 	}
-
+/**
+     * Removes a reaction from a post.
+     * 
+     * @param pstID The ID of the post to remove the reaction from.
+     * @return True if the unreaction was successful, false otherwise.
+     */
 	public boolean unreactToPost(String pstID) {
         for (Post p : this.posts) {
             if (p.getID() == Integer.parseInt(pstID)) {
@@ -136,23 +165,43 @@ public class User {
         }
         return false;
     }
-
+ /**
+     * Subscribes the user to another user's posts.
+     * 
+     * @param name The username of the user to subscribe to.
+     * @return True if the subscription was successful, false otherwise.
+     */
 	public boolean subscribe(String name){
         this.subscribers.add(name);
         this.subscribed.add(name);
         return true;
     }
-
+/**
+     * Unsubscribes the user from another user's posts.
+     * 
+     * @param name The username of the user to unsubscribe from.
+     * @return True if the unsubscription was successful, false otherwise.
+     */
 	public boolean unsubscribe(String name){
         this.subscribers.remove(name);
         return true;
     }
-
+ /**
+     * Restricts a specific user from accessing the user's posts.
+     * 
+     * @param name The username of the user to restrict.
+     * @return True if the restriction was successful, false otherwise.
+     */
 	public boolean restrict(String name)  {
         this.subscribers.remove(name);
         return true;
     }
-
+/**
+     * Unrestricts a specific user, allowing access to the user's posts.
+     * 
+     * @param name The username of the user to unrestrict.
+     * @return True if the unrestriction was successful, false otherwise.
+     */
 	public boolean unrestrict(String name){
         this.restricted.remove(name);
         return true;

@@ -15,7 +15,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+/**
+ * Represents the public feed interface in a social media application.
+ */
 public class PublicFeed extends JFrame{
     String nme;
     String name;
@@ -41,7 +43,13 @@ public class PublicFeed extends JFrame{
     Socials social = new Socials("social");
 
     JTextField search = new JTextField(11);
-
+ /**
+     * Constructor for PublicFeed.
+     *
+     * @param name The name of the user.
+     * @param loginFrame The frame of the login interface.
+     * @param social The social media platform instance.
+     */
     JFrame loginFrame;
     public PublicFeed(String name, JFrame loginFrame, Socials social){
         this.loginFrame = loginFrame;
