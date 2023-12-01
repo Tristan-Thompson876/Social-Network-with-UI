@@ -58,14 +58,14 @@ public class Profile extends JFrame{
     String nme;
     JLabel uname = new JLabel("Username: ");
     JLabel postLabel = new JLabel("Post: ");
-/**
+
+    /**
      * Constructor to create a Profile interface.
      * 
      * @param dname The display name of the user.
      * @param social The social media platform instance.
      * @param loginFrame The frame of the login interface.
      */
-    
     public Profile(String dname, Socials social, JFrame loginFrame){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.nme = dname;
@@ -168,7 +168,10 @@ public class Profile extends JFrame{
         this.setVisible(true);
        
     }
-    //method to post each post created by the user on the panel
+
+    /**
+     * method to post each post created by the user on the panel
+     */
     public void postToPanelForLoggedInUser() {
         postPanel.removeAll();  // Clear existing components from the postPanel
     
@@ -238,6 +241,9 @@ public class Profile extends JFrame{
     }
     
 
+    /**
+     * method to switch elements on panel
+     */
     private void switchToMakePost() {
         creating = true;
        

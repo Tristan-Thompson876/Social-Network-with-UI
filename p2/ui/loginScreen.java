@@ -45,8 +45,11 @@ public class LoginScreen extends JFrame {
     private boolean isSignUp = false;
    
 
-    
-    IllegalArgumentException ex = new IllegalArgumentException("");
+    /**
+     * 
+     * @param social
+     * constructor for loginscreen
+     */
     public LoginScreen(Socials social){
         this.frame = this;
         this.social = social;
@@ -90,70 +93,34 @@ public class LoginScreen extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 switchToSignUp();
-        
+
                 String uname = Su_unameText.getText();
                 String mpassword = Su_passwordText.getText();
-        
+
                 try {
                     // Input Validation
                     if (uname.isEmpty() || mpassword.isEmpty()) {
-                        throw new IllegalArgumentException("Username and/or password cannot be empty.");
+                        throw new IllegalArgumentException("Username and or password cannot be empty.");
                     }
-        
+
                     // Check if username already exists
                     if (social.getAllSocialsUsers().contains(uname)) {
                         throw new IllegalArgumentException("Username already in use. Please choose a different username.");
                     }
-        
+
                     // Clear any previous error messages
                     errorLabel.setText("");
-        
+
                     // Perform signup logic here
                     social.addNewSocialsUser(uname, mpassword);
                     System.out.println("Signed up");
-        
+
                 } catch (IllegalArgumentException ex) {
                     // Display the error message on the label
-                    Signup.addActionListener(new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        switchToSignUp();
-
-        String uname = Su_unameText.getText();
-        String mpassword = Su_passwordText.getText();
-
-        try {
-            // Input Validation
-            if (uname.isEmpty() || mpassword.isEmpty()) {
-                throw new IllegalArgumentException("Username and/or password cannot be empty.");
-            }
-
-            // Check if username already exists
-            if (social.getAllSocialsUsers().contains(uname)) {
-                throw new IllegalArgumentException("Username already in use. Please choose a different username.");
-            }
-
-            // Clear any previous error messages
-            errorLabel.setText("");
-
-            // Perform signup logic here
-            social.addNewSocialsUser(uname, mpassword);
-            System.out.println("Signed up");
-
-        } catch (IllegalArgumentException ex) {
-            // Display the error message on the label
-            errorLabel.setText("Error: " + ex.getMessage());
-        }
-    }
-});
-
+                    errorLabel.setText("Error: " + ex.getMessage());
                 }
             }
         });
-
-        
-        
-        
 
         submit.addActionListener(new ActionListener() {
             @Override
@@ -166,7 +133,7 @@ public class LoginScreen extends JFrame {
                         System.out.println(social.getWhoIsLoggedIn().getUname()+" thank you");
                         //social.isSocialsUser(uname);
                         System.out.println("logged in");
-                        new PublicFeed(uname, frame, social );
+                        new PublicFeed(uname, frame, social);
                     }
                 
                 }
@@ -180,13 +147,12 @@ public class LoginScreen extends JFrame {
         this.setVisible(true);
 
     }
-    public void mymessage(){
-            errorLabel.setText("Error: " + ex.getMessage());
-        }
 
+    /**
+     * method to swith elements on panel
+     */
     private void switchToSignUp() {
         isSignUp = true;
-        
         loginPanel.setBorder(new EmptyBorder(new Insets(100, 300, 200, 300))); 
         loginPanel.remove(username);
         loginPanel.remove(unameText);

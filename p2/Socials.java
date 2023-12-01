@@ -22,11 +22,20 @@ public class Socials {
 	private ArrayList<String> dnames = new ArrayList<String>();
 	private User u;
 
+	/**
+	 * Contsructor 1 for socials
+	 * @param name
+	 */
 	public Socials(String name) {
 		this.name = name;
 		this.feedSort = FeedAlgorithm.Popular;
 	}
 
+	/**
+	 * Constructor 2 for socials
+	 * @param name
+	 * @param feedSort
+	 */
 	public Socials(String name, FeedAlgorithm feedSort) {
 		super();
 		this.name = name;
