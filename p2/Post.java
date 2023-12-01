@@ -23,15 +23,18 @@ public abstract class Post implements Comparable<Post> {
 	private Reaction downvote = new Reaction(ReactionType.Downvote);
 	private ArrayList<Content> contents = new ArrayList<Content>();
 	private ArrayList<String> reactedUsers = new ArrayList<>();
-	private Content content;
+	private String content;
 	private User username;
-
-	public Post() {
-		assignPostID();
-	}
 
 	public Post(PostAudience sharedWith) {
 		this.sharedWith = sharedWith;
+	}
+
+	public Post(PostAudience sharedWith, PostType type, String content) {
+		this.sharedWith = sharedWith;
+		this.content = content;
+		this.postType = type;
+
 		assignPostID();
 	}
 
@@ -106,7 +109,7 @@ public abstract class Post implements Comparable<Post> {
 		return popularityScore;
 	}
 
-	public Content getContent() {
+	public String getContent() {
         return content;
     }
 
@@ -141,7 +144,7 @@ public abstract class Post implements Comparable<Post> {
 	/**
 	 * Content setter
 	 */
-	public void setContent(Content content){
+	public void setContent(String content){
 		this.content = content;
 	}
 	/**

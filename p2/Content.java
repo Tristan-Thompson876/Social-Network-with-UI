@@ -32,7 +32,7 @@ public class Content {
 
     @Override
     public String toString() {
-        return "Content:" + data + '\'';
+        return "Info:" + data + '\'';
     }
 }
 

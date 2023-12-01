@@ -1,23 +1,22 @@
 package p2;
 
-import java.awt.Dimension;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
+import java.util.ArrayList;
+
 import p1.enums.PostAudience;
 
 public class ExternalLinkPost extends Post {
-    private Content url; // immutable instance data
+    private ArrayList<Content> url;
 
     public ExternalLinkPost(PostAudience sharedWith, String url) {
         super(sharedWith);
-        this.url = new Content(url);
+        this.url = new ArrayList<>();
+        addContents(url);
     }
+
+    private void addContents(String... contents) {
+		for (String u : contents)
+			this.url.add(new Content(u));
+	}
 
     @Override
     public String toString() {
@@ -33,7 +32,7 @@ public class ExternalLinkPost extends Post {
         // Add additional logic for displaying the URL in your GUI
     }
 
-	public String getUrl() {
-		return null;
-	}
+	/*public String getUrl() {
+		return url;
+	}*/
 }

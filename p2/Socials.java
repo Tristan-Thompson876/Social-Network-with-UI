@@ -149,6 +149,10 @@ public class Socials {
 		return dnames;
 	}
 
+	public ArrayList<User> getUsers(){
+		return users;
+	}
+
 	public ArrayList<Integer> getSocialsUserFeed(String name) {
 		return new ArrayList<Integer>();
 	}
@@ -169,6 +173,7 @@ public class Socials {
 	public void addNewPost(PostType type, PostAudience sharedWith, String... contents) {
 		if (whoIsLoggedIn != null) {
 			posts.add(whoIsLoggedIn.addNewPostu(type, sharedWith, contents));
+			System.out.println("youve made it");
 		}		
 	}
 	//

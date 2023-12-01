@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Profile extends JFrame{
+    
 
     Boolean creating = false;
     JPanel profilePanel = new JPanel();
@@ -27,10 +28,12 @@ public class Profile extends JFrame{
     JPanel m1 = new JPanel();
     JPanel m2 = new JPanel();
     Socials social;
+    JFrame loginFrame;
 
     JButton publicFeedButton = new JButton("feed");
     JButton createPost = new JButton("create post");
     JButton submit = new JButton("Submit");
+    JButton back = new JButton("Back");
 
     JLabel postype = new JLabel("Post type: ");
     JCheckBox pstype = new JCheckBox("Text");
@@ -52,11 +55,13 @@ public class Profile extends JFrame{
     String nme;
     JLabel uname = new JLabel("Username: ");
     JLabel postLabel = new JLabel("Post: ");
+
     
-    public Profile(String name, Socials social){
+    public Profile(String dname, Socials social, JFrame loginFrame){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.nme = name;
+        this.nme = dname;
         this.social = social;
+        this.loginFrame = loginFrame;
         profilePanel.setSize(700, 500);
         this.setSize(800, 800);
         profilePanel.setBackground(Color.decode("#00001a"));
@@ -92,6 +97,13 @@ public class Profile extends JFrame{
             }
         });
 
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switchBack();
+            }
+        });
+
         submit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -112,14 +124,19 @@ public class Profile extends JFrame{
                     } else if (aud3.isSelected()) {
                         audience = PostAudience.Subscribers.name();
                     }
-                    String content = postContenTextField.getText();
+                    
+                    String contentText = postContenTextField.getText();  // Get content from the text field
         
-                    if(!postType.isEmpty()) {
+                    if (!postType.isEmpty()) {
                         PostType type = PostType.valueOf(postType);
                         PostAudience postAudience = PostAudience.valueOf(audience);
         
-                        social.addNewPost(type, postAudience, content);
-                        
+                        // Create Content object with the content from the text field
+                        Content myContent = new Content(contentText);
+        
+                        // Pass Content object to addNewPost method
+                        social.addNewPost(type, postAudience, contentText);
+        
                         System.out.println("post successfully");
                         postToPanelForLoggedInUser();
                     } else {
@@ -130,6 +147,7 @@ public class Profile extends JFrame{
                 }
             }
         });
+        
         
         
 
@@ -147,29 +165,46 @@ public class Profile extends JFrame{
         User loggedInUser = social.getWhoIsLoggedIn();
     
         if (loggedInUser != null) {
-            ArrayList<Post> userPosts = new ArrayList<>(loggedInUser.getPosts());
+            System.out.println(" I got greens");
+            //ArrayList<Post> userPosts = new ArrayList<>(loggedInUser.getPosts());
+            System.out.println("Beans");
     
-            for (Post post : userPosts) {
+            //userPosts
+            for (Post post : loggedInUser.getPosts()) {
+                System.out.println(post);
                 JPanel postContentPanel = new JPanel();
                 postContentPanel.setLayout(new BoxLayout(postContentPanel, BoxLayout.Y_AXIS));
     
+                //post.getContent().setData();
                 JLabel typeLabel = new JLabel("Type: " + post.getPostType());
                 JLabel audienceLabel = new JLabel("Audience: " + post.getSharedWith());
                 JLabel contentLabel;
     
+                System.out.println(post);
                 if (post.getPostType() == PostType.Text) {
                     TextPost textPost = (TextPost) post;
-                    Content textContent = textPost.getContent();
+                    //post.getContent().setData();
+                    //Post textContent = post;
+                    Integer S = post.getID();
+                    //String textContent = social.displayPost(S);
+                    System.out.println(post.getContent()+ "sssss");
+
+                    contentLabel = new JLabel("Content: ");
+/* 
+                    System.out.println(post);
                     if (textContent != null) {
-                        contentLabel = new JLabel("Content: " + textContent.getData());
+                        System.out.println("The good block");
+                        contentLabel = new JLabel("Content: " + textContent);
                     } else {
+                        System.out.println(post + "So Why is it No text");
                         contentLabel = new JLabel("Content: [No text content]");
-                    }
+                    } */
+                
                 } else if (post.getPostType() == PostType.ExternalLink) {
                     ExternalLinkPost linkPost = (ExternalLinkPost) post;
-                    Content linkContent = linkPost.getContent();
+                    String linkContent = linkPost.getContent();
                     if (linkContent != null) {
-                        contentLabel = new JLabel("Content: " + linkContent.getData());
+                        contentLabel = new JLabel("Content: " + linkContent);
                     } else {
                         contentLabel = new JLabel("Content: [No external link]");
                     }
@@ -217,6 +252,7 @@ public class Profile extends JFrame{
         postPanel.add(content);
         postPanel.add(postContenTextField);
         postPanel.add(submit);
+        postPanel.add(back);
         
 
         postPanel.revalidate();
@@ -232,8 +268,10 @@ public class Profile extends JFrame{
         postPanel.remove(content);
         postPanel.remove(postContenTextField);
         postPanel.remove(submit);
+        postPanel.remove(back);
 
-        postPanel.add(postLabel);
+
+        new PublicFeed(nme, loginFrame, social);
         
 
         postPanel.revalidate();
