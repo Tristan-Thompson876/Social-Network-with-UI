@@ -45,7 +45,8 @@ public class LoginScreen extends JFrame {
     private boolean isSignUp = false;
    
 
-    Exception some = null;
+    
+    IllegalArgumentException ex = new IllegalArgumentException("");
     public LoginScreen(Socials social){
         this.frame = this;
         this.social = social;
