@@ -19,6 +19,9 @@ public class TextPost extends Post {
 		for (String c : contents)
 			this.contents.add(new Content(c));
 	}
+	public ArrayList<Content> getContents(){
+		return contents;
+	}
 
 	@Override
 	public String toString() {

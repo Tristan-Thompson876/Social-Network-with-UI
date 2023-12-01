@@ -187,7 +187,7 @@ public class Profile extends JFrame{
                     //Post textContent = post;
                     Integer S = post.getID();
                     //String textContent = social.displayPost(S);
-                    System.out.println(post.getContent()+ "sssss");
+                    System.out.println(textPost.getContent()+ "sssss");
 
                     contentLabel = new JLabel("Content: ");
 /* 

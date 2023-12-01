@@ -26,14 +26,17 @@ public abstract class Post implements Comparable<Post> {
 	private String content;
 	private User username;
 
+	public Post() {
+		assignPostID();
+	} 
+
 	public Post(PostAudience sharedWith) {
 		this.sharedWith = sharedWith;
 	}
 
-	public Post(PostAudience sharedWith, PostType type, String content) {
+	public Post(PostAudience sharedWith, String content) {
 		this.sharedWith = sharedWith;
 		this.content = content;
-		this.postType = type;
 
 		assignPostID();
 	}
@@ -110,6 +113,7 @@ public abstract class Post implements Comparable<Post> {
 	}
 
 	public String getContent() {
+		System.out.println(content);
         return content;
     }
 
