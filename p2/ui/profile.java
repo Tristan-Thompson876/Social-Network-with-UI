@@ -93,6 +93,7 @@ public class Profile extends JFrame{
         createPost.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
                 switchToMakePost();
             }
         });
@@ -232,6 +233,7 @@ public class Profile extends JFrame{
         creating = true;
        
         postPanel.remove(postLabel);
+        postPanel.removeAll();
         profilePanel.setLayout(new BorderLayout());
         profilePanel.add(aboutPanel, BorderLayout.PAGE_START);
         profilePanel.add(postPanel, BorderLayout.CENTER);
