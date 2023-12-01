@@ -189,7 +189,7 @@ public class Profile extends JFrame{
                     //String textContent = social.displayPost(S);
                     System.out.println(textPost.getContent()+ "sssss");
 
-                    contentLabel = new JLabel("Content: ");
+                    contentLabel = new JLabel("Content: " + textPost.getContent());
 /* 
                     System.out.println(post);
                     if (textContent != null) {

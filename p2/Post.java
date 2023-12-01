@@ -114,7 +114,25 @@ public abstract class Post implements Comparable<Post> {
 
 	public String getContent() {
 		System.out.println(content);
-        return content;
+        if (this instanceof TextPost) {
+			// If it's a TextPost, concatenate the contents
+			TextPost textPost = (TextPost) this;
+			StringBuilder contentBuilder = new StringBuilder();
+			for (Content contentItem : textPost.getContents()) {
+				contentBuilder.append(contentItem).append(System.lineSeparator());
+			}
+			System.out.println(contentBuilder.toString());
+			return contentBuilder.toString();
+		} else if (this instanceof ExternalLinkPost) {
+			// If it's an ExternalLinkPost, return the URL directly
+			ExternalLinkPost linkPost = (ExternalLinkPost) this;
+			System.out.println("External Link: " + linkPost.getContent());
+			return "External Link: " + linkPost.getContent();
+		} else {
+			// For other types of posts, return the content directly
+			System.out.println(content);
+			return content;
+		}
     }
 
 

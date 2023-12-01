@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import p1.enums.PostAudience;
 
+
 public class TextPost extends Post {
 	// immutable instance data
 	private ArrayList<Content> contents;
@@ -16,8 +17,10 @@ public class TextPost extends Post {
 	}
 
 	private void addContents(String... contents) {
+		this.contents = new ArrayList<>();
+		System.out.println("it got added");
 		for (String c : contents)
-			this.contents.add(new Content(c));
+		this.contents.add(new Content(c));
 	}
 	public ArrayList<Content> getContents(){
 		return contents;
@@ -35,7 +38,7 @@ public class TextPost extends Post {
 				", Shared With=" + getSharedWith() +
 				", Popularity Score=" + getPopularityScore() +
 				", Post Contents:\n" + postContentsBuilder.toString() +
-				'}';
+				"}";
 	}
 	
 

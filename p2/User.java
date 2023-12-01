@@ -59,7 +59,7 @@ public class User {
         return ++postCounter;
     }
 
-    public Post addNewPostu(PostType type, PostAudience sharedWith, String... contents) {
+    public Post addNewPostu(PostType type, PostAudience sharedWith, String[] contents) {
         if (!isLoggedIn()) {
             System.out.println("User is not logged in. Cannot add a new post.");
             return null;
