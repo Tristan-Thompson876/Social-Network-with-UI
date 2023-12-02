@@ -4,9 +4,11 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import p1.enums.PostType;
 import p2.ExternalLinkPost;
 import p2.Post;
 import p2.Socials;
+import p2.TextPost;
 import p2.User;
 
 import java.awt.event.ActionEvent;
@@ -32,7 +34,8 @@ public class PublicFeed extends JFrame{
     //labels
     JLabel searchLabel = new JLabel("Search");
     JLabel username = new JLabel("User:");
-    JLabel post = new JLabel("Post");
+    JLabel posts = new JLabel("Post");
+    JLabel contentLabel = new JLabel("");
     JLabel extra = new JLabel();
     JButton extraButton = new JButton("back");
     
@@ -71,7 +74,7 @@ public class PublicFeed extends JFrame{
        
         feedPanel.add(postPanel);
         feedPanel.add(navPanel);
-        postPanel.add(post);
+        postPanel.add(posts);
         postPanel.add(upVote);
         postPanel.add(downVote);
         navPanel.add(profile);
@@ -87,6 +90,8 @@ public class PublicFeed extends JFrame{
         
         this.add(feedPanel);
         this.setVisible(true);
+
+        Showposts();
 
 
         profile.addActionListener(new ActionListener() {
@@ -129,8 +134,48 @@ public class PublicFeed extends JFrame{
     }
 
     public void Showposts(){
+        JPanel postContentPanel = new JPanel();
+                postContentPanel.setLayout(new BoxLayout(postContentPanel, BoxLayout.Y_AXIS));
         for (Post post : social.getPosts()) {
-    }
+            if (post.getPostType() == PostType.Text) {
+                TextPost textPost = (TextPost) post;
+                //post.getContent().setData();
+                //Post textContent = post;
+                Integer S = post.getID();
+                //String textContent = social.displayPost(S);
+                System.out.println(textPost.getContent()+ "feed");
+
+                contentLabel = new JLabel("Content: " + textPost.getContent());
+
+                System.out.println(post);
+                    System.out.println("The good block");
+                    contentLabel = new JLabel("Content: " + textPost.getContent());
+                
+            
+            } else if(post.getPostType() == PostType.ExternalLink) {
+                    ExternalLinkPost linkPost = (ExternalLinkPost) post;
+                    String linkContent = linkPost.getContent();
+                    if (linkContent != null) {
+                        contentLabel = new JLabel("Content: " + linkContent);
+                    } else {
+                        contentLabel = new JLabel("Content: [No external link]");
+                    }
+                } else {
+                    contentLabel = new JLabel("Content: [Unknown post type]");
+                }
+    
+                //postPanel.add(typeLabel);
+                //postPanel.add(audienceLabel);
+                postContentPanel.add(contentLabel);
+    
+                postContentPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+    
+                postPanel.add(postContentPanel);
+            }
+    
+
+
+    
 
     // Refresh the display
     postPanel.revalidate();
@@ -210,7 +255,7 @@ public class PublicFeed extends JFrame{
     private void switchToSearchedUserPage() {
         System.out.println("new page");
        
-        postPanel.remove(post);
+        postPanel.remove(posts);
         postPanel.remove(upVote);
         postPanel.remove(downVote);
         
@@ -234,7 +279,7 @@ public class PublicFeed extends JFrame{
             postPanel.remove(extraButton);
 
         
-            postPanel.add(post);
+            postPanel.add(posts);
             postPanel.add(upVote);
             postPanel.add(downVote);
 
