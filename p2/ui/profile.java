@@ -16,7 +16,10 @@ import p2.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
+/**
+ * Represents the profile interface in a social media application.
+ * This class manages the user's profile view and interaction with posts.
+ */
 public class Profile extends JFrame{
     
 
@@ -55,7 +58,13 @@ public class Profile extends JFrame{
     String nme;
     JLabel uname = new JLabel("Username: ");
     JLabel postLabel = new JLabel("Post: ");
-
+/**
+     * Constructor to create a Profile interface.
+     * 
+     * @param dname The display name of the user.
+     * @param social The social media platform instance.
+     * @param loginFrame The frame of the login interface.
+     */
     
     public Profile(String dname, Socials social, JFrame loginFrame){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

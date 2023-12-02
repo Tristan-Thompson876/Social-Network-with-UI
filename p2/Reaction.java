@@ -3,14 +3,21 @@ package p2;
 import java.util.ArrayList;
 
 import p1.enums.ReactionType;
-
+/**
+ * Represents a reaction to a post in a social media context.
+ * This class handles the type of reaction and tracks users who have reacted.
+ */
 public class Reaction {
 	// immutable instance data
 	private ReactionType type;
 
 	// mutable instance data
 	private ArrayList<String> reactors = new ArrayList<String>();
-
+     /**
+     * Constructor to create a new Reaction instance.
+     * 
+     * @param type The type of reaction (like, dislike, etc.).
+     */
 	public Reaction(ReactionType type) {
 		this.type = type;
 	}
